@@ -56,3 +56,70 @@ class ContractDeleteAPIView(DestroyAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'id'
     permission_classes = [IsAuthenticated,]
+
+
+class UserRole(RetrieveAPIView):
+
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated,]
+    lookup_field = 'username'
+    lookup_url_kwarg = 'username'
+
+    def get_queryset(self , *args , **kwargs):
+        queryset_list = CustomUser.objects.all()
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(
+            Q(username__icontains = query)|
+            Q(role__icontains = query)
+            ).distinct()
+
+        return queryset_list
+
+class UserListAPIView(ListAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    search_fields = ['id', 'username']
+
+
+class UserDetailAPIView(RetrieveAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_fields = 'username'
+    lookup_url_kwarg = 'username'
+
+class UserDeleteAPIView(DestroyAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_fields = 'username'
+    lookup_url_kwarg = 'username'
+
+class UserCreateAPIView(CreateAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        instance.set_password(instance.password)
+        instance.save()
+
+class UserUpdateAPIView(UpdateAPIView):
+
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_fields = ['username', ]
+    lookup_url_kwarg = 'username'
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        instance.set_password(instance.password)
+        instance.save()

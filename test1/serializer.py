@@ -8,3 +8,9 @@ class ContractSerializer(ModelSerializer):
     class Meta:
         model  = Contract
         fields = '__all__'
+
+class CustomUserSerializer(ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
