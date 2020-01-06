@@ -31,7 +31,7 @@ class City(models.Model):
         return self.name
 
 class Athlete(models.Model):
-
+    user       = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     first_name = models.CharField(max_length = 100, null = True)
     last_name  = models.CharField(max_length = 100, null = True)
     nat_code   = models.CharField(max_length = 100, primary_key = True)
@@ -42,7 +42,7 @@ class Athlete(models.Model):
         return self.first_name + ' ' + self.last_name
 
 class Coach(models.Model):
-
+    user       = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     first_name = models.CharField(max_length = 100, null = True)
     last_name  = models.CharField(max_length = 100, null = True)
     nat_code   = models.CharField(max_length = 100, primary_key = True)

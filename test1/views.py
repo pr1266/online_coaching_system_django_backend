@@ -26,27 +26,50 @@ import time
 import json
 
 
+class CoachesOfAthletes(ListAPIView):
+
+    queryset           = Contract.objects.all()
+    serializer_class   = ContractSerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = 'id'
+
+    def get_queryset(self , *args , **kwargs):
+        
+        queryset_list = Contract.objects.all()
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(athlete__user__username = query)
+
+        return queryset_list
+
+
+class ContractCreateAPIView(CreateAPIView):
+
+    queryset = Contract.objects.all()
+    serializer_class = ContractSerializer
+    permission_classes = [IsAuthenticated]
+    
 class ContractListAPIView(ListAPIView):
 
     queryset           = Contract.objects.all()
     serializer_class   = ContractSerializer
     permission_classes = [IsAuthenticated,]
-    search_fields = ['__all__']
+    search_fields      = ['__all__']
 
 class ContractDetailAPIView(RetrieveAPIView):
 
     queryset           = Contract.objects.all()
     serializer_class   = ContractSerializer
     permission_classes = [IsAuthenticated,]
-    lookup_field = 'id'
-    lookup_url_kwarg = 'id'
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
 
 class ContractUpdateAPIView(UpdateAPIView):
 
-    queryset = Contract.objects.all()
-    serializer_class =  ContractSerializer
-    lookup_field = 'id'
-    lookup_url_kwarg = 'id'
+    queryset           = Contract.objects.all()
+    serializer_class   =  ContractSerializer
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
     permission_classes = [IsAuthenticated,]
 
 class ContractDeleteAPIView(DestroyAPIView):
@@ -57,29 +80,10 @@ class ContractDeleteAPIView(DestroyAPIView):
     lookup_url_kwarg = 'id'
     permission_classes = [IsAuthenticated,]
 
-
-class UserRole(RetrieveAPIView):
-
-    serializer_class = CustomUserSerializer
-    permission_classes = [IsAuthenticated,]
-    lookup_field = 'username'
-    lookup_url_kwarg = 'username'
-
-    def get_queryset(self , *args , **kwargs):
-        queryset_list = CustomUser.objects.all()
-        query = self.request.GET.get('q')
-        if query:
-            queryset_list = queryset_list.filter(
-            Q(username__icontains = query)|
-            Q(role__icontains = query)
-            ).distinct()
-
-        return queryset_list
-
 class UserListAPIView(ListAPIView):
 
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
     search_fields = ['id', 'username']
 
@@ -87,7 +91,7 @@ class UserListAPIView(ListAPIView):
 class UserDetailAPIView(RetrieveAPIView):
 
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
     lookup_fields = 'username'
     lookup_url_kwarg = 'username'
@@ -95,7 +99,7 @@ class UserDetailAPIView(RetrieveAPIView):
 class UserDeleteAPIView(DestroyAPIView):
 
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
     lookup_fields = 'username'
     lookup_url_kwarg = 'username'
@@ -103,7 +107,7 @@ class UserDeleteAPIView(DestroyAPIView):
 class UserCreateAPIView(CreateAPIView):
 
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -114,7 +118,7 @@ class UserCreateAPIView(CreateAPIView):
 class UserUpdateAPIView(UpdateAPIView):
 
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = CustomUserSerializer
     permission_classes = [IsAuthenticated]
     lookup_fields = ['username', ]
     lookup_url_kwarg = 'username'
