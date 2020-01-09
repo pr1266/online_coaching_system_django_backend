@@ -128,6 +128,117 @@ class UserUpdateAPIView(UpdateAPIView):
         instance.set_password(instance.password)
         instance.save()
 
+class AthleteCreateAPIView(CreateAPIView):
+
+    queryset = Athlete.objects.all()
+    serializer_class = AthleteSerializer
+    permission_classes = [IsAuthenticated]
+
+class AthleteListAPIView(ListAPIView):
+
+    queryset           = Athlete.objects.all()
+    serializer_class   = AthleteSerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = ['__all__']
+
+class AthleteDetailAPIView(RetrieveAPIView):
+
+    queryset           = Athlete.objects.all()
+    serializer_class   = AthleteSerializer
+    permission_classes = [IsAuthenticated,]
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+
+class AthleteUpdateAPIView(UpdateAPIView):
+
+    queryset           = Athlete.objects.all()
+    serializer_class   =  AthleteSerializer
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+    permission_classes = [IsAuthenticated,]
+
+class AthleteDeleteAPIView(DestroyAPIView):
+
+    queryset = Athlete.objects.all()
+    serializer_class =  AthleteSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+    permission_classes = [IsAuthenticated,]
+
+class CoachCreateAPIView(CreateAPIView):
+
+    queryset = Coach.objects.all()
+    serializer_class = CoachSerializer
+    permission_classes = [IsAuthenticated]
+
+class CoachListAPIView(ListAPIView):
+
+    queryset           = Coach.objects.all()
+    serializer_class   = CoachSerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = ['__all__']
+
+class CoachDetailAPIView(RetrieveAPIView):
+
+    queryset           = Coach.objects.all()
+    serializer_class   = CoachSerializer
+    permission_classes = [IsAuthenticated,]
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+
+class CoachUpdateAPIView(UpdateAPIView):
+
+    queryset           = Coach.objects.all()
+    serializer_class   =  CoachSerializer
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+    permission_classes = [IsAuthenticated,]
+
+class CoachDeleteAPIView(DestroyAPIView):
+
+    queryset = Coach.objects.all()
+    serializer_class =  CoachSerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+    permission_classes = [IsAuthenticated,]
+
+class CityCreateAPIView(CreateAPIView):
+
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+    permission_classes = [IsAuthenticated]
+
+class CityListAPIView(ListAPIView):
+
+    queryset           = City.objects.all()
+    serializer_class   = CitySerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = ['__all__']
+
+class CityDetailAPIView(RetrieveAPIView):
+
+    queryset           = City.objects.all()
+    serializer_class   = CitySerializer
+    permission_classes = [IsAuthenticated,]
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+
+class CityUpdateAPIView(UpdateAPIView):
+
+    queryset           = City.objects.all()
+    serializer_class   =  CitySerializer
+    lookup_field       = 'id'
+    lookup_url_kwarg   = 'id'
+    permission_classes = [IsAuthenticated,]
+
+class CityDeleteAPIView(DestroyAPIView):
+
+    queryset = City.objects.all()
+    serializer_class =  CitySerializer
+    lookup_field = 'id'
+    lookup_url_kwarg = 'id'
+    permission_classes = [IsAuthenticated,]
+
 @api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 def get_username_athlete(request):

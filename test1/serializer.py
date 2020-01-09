@@ -26,3 +26,9 @@ class CoachSerializer(ModelSerializer):
     class Meta:
         model = Coach
         fields = '__all__'
+
+class CitySerializer(ModelSerializer):
+
+    class Meta:
+        model =  City
+        fields = '__all__'
