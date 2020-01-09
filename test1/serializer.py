@@ -14,3 +14,15 @@ class CustomUserSerializer(ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+class AthleteSerializer(ModelSerializer):
+
+    class Meta:
+        model = Athlete
+        fields = '__all__'
+
+class CoachSerializer(ModelSerializer):
+
+    class Meta:
+        model = Coach
+        fields = '__all__'

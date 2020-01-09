@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^user/(?P<username>[\w-]+)/edit/$' , views.UserUpdateAPIView.as_view() , name = 'edit'),
     url(r'^user/(?P<username>[\w-]+)/delete/$' , views.UserDeleteAPIView.as_view() , name = 'delete'),
     url(r'^coachofathlete/$', views.CoachesOfAthletes.as_view()),
+    path('get_username_athlete/', views.get_username_athlete),
+    path('get_username_coach/', views.get_username_coach),
 ]

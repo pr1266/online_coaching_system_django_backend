@@ -38,7 +38,7 @@ class CoachesOfAthletes(ListAPIView):
         queryset_list = Contract.objects.all()
         query = self.request.GET.get('q')
         if query:
-            queryset_list = queryset_list.filter(athlete__user__username = query)
+            queryset_list = queryset_list.filter(Q(athlete__user__username = query) & Q(status = True))
 
         return queryset_list
 
@@ -48,7 +48,7 @@ class ContractCreateAPIView(CreateAPIView):
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
     permission_classes = [IsAuthenticated]
-    
+
 class ContractListAPIView(ListAPIView):
 
     queryset           = Contract.objects.all()
@@ -127,3 +127,25 @@ class UserUpdateAPIView(UpdateAPIView):
         instance = serializer.save()
         instance.set_password(instance.password)
         instance.save()
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def get_username_athlete(request):
+
+    username = request.data['username']
+
+    obj = Athlete.objects.get(user = username)
+    ser_obj = AthleteSerializer(obj, many = False)
+
+    return Response(ser_obj.data)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def get_username_coach(request):
+
+    username = request.data['username']
+
+    obj = Coach.objects.get(user = username)
+    ser_obj = CoachSerializer(obj, many = False)
+
+    return Response(ser_obj.data)
