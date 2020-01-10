@@ -183,8 +183,16 @@ class CoachDetailAPIView(RetrieveAPIView):
     queryset           = Coach.objects.all()
     serializer_class   = CoachSerializer
     permission_classes = [IsAuthenticated,]
-    lookup_field       = 'id'
-    lookup_url_kwarg   = 'id'
+    lookup_field       = 'user__username'
+    lookup_url_kwarg   = 'user__username'
+
+class CoachDetailAPIView_(RetrieveAPIView):
+
+    queryset           = Coach.objects.all()
+    serializer_class   = CoachSerializer
+    permission_classes = [IsAuthenticated,]
+    lookup_field       = 'nat_code'
+    lookup_url_kwarg   = 'nat_code'
 
 class CoachUpdateAPIView(UpdateAPIView):
 

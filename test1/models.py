@@ -47,10 +47,15 @@ class Coach(models.Model):
     last_name  = models.CharField(max_length = 100, null = True)
     nat_code   = models.CharField(max_length = 100, primary_key = True)
     city       = models.ForeignKey(City, on_delete = models.CASCADE)
+    degree     = models.CharField(max_length = 100, null = True)
 
     def __str__(self):
 
         return self.first_name + ' ' + self.last_name
+
+class Records(models.Model):
+    coach   = models.ForeignKey(Coach, on_delete = models.CASCADE)
+    text    = models.CharField(max_length = 100, null = True)
 
 class Contract(models.Model):
 
