@@ -36,7 +36,8 @@ class Athlete(models.Model):
     last_name  = models.CharField(max_length = 100, null = True)
     nat_code   = models.CharField(max_length = 100, primary_key = True)
     city       = models.ForeignKey(City, on_delete = models.CASCADE)
-
+    picture    = models.ImageField(upload_to = 'athlete/', null = True)
+    
     def __str__(self):
         
         return self.first_name + ' ' + self.last_name
@@ -48,6 +49,7 @@ class Coach(models.Model):
     nat_code   = models.CharField(max_length = 100, primary_key = True)
     city       = models.ForeignKey(City, on_delete = models.CASCADE)
     degree     = models.CharField(max_length = 100, null = True)
+    picture    = models.ImageField(upload_to = 'coach/', null = True)
 
     def __str__(self):
 
@@ -56,6 +58,7 @@ class Coach(models.Model):
 class Records(models.Model):
     coach   = models.ForeignKey(Coach, on_delete = models.CASCADE)
     text    = models.CharField(max_length = 100, null = True)
+    year    = models.IntegerField(default = 2000, null = True)
 
 class Contract(models.Model):
 

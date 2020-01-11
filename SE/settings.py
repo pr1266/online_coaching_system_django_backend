@@ -1,6 +1,7 @@
 import os
 import datetime
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'ahzk6x2b&qj(mv5%xy39b42euq@r3ruf#+sha2@^#)y@s%x6f)'
 DEBUG = True
 
@@ -103,3 +104,5 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
