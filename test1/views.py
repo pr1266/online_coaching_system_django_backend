@@ -42,6 +42,38 @@ class CoachesOfAthletes(ListAPIView):
 
         return queryset_list
 
+class AthletesOfCoach(ListAPIView):
+
+    queryset           = Contract.objects.all()
+    serializer_class   = ContractSerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = 'id'
+
+    def get_queryset(self , *args , **kwargs):
+        
+        queryset_list = Contract.objects.all()
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(Q(coach__user__username = query) & Q(status = True))
+
+        return queryset_list
+
+class RequestsOfCoach(ListAPIView):
+
+    queryset           = Contract.objects.all()
+    serializer_class   = ContractSerializer
+    permission_classes = [IsAuthenticated,]
+    search_fields      = 'id'
+
+    def get_queryset(self , *args , **kwargs):
+        
+        queryset_list = Contract.objects.all()
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(Q(coach__user__username = query) & Q(status = False))
+
+        return queryset_list
+
 
 class ContractCreateAPIView(CreateAPIView):
 

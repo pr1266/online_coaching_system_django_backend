@@ -44,8 +44,11 @@ urlpatterns = [
     url(r'^contract/(?P<id>[\w-]+)/$' , views.ContractDetailAPIView.as_view() , name = 'detail'),
     url(r'^contract/(?P<id>[\w-]+)/edit/$' , views.ContractUpdateAPIView.as_view() , name = 'edit'),
     url(r'^contract/(?P<id>[\w-]+)/delete/$' , views.ContractDeleteAPIView.as_view() , name = 'delete'),
-    url(r'^coachofathlete/$', views.CoachesOfAthletes.as_view()),
     
+    url(r'^coachofathlete/$', views.CoachesOfAthletes.as_view()),
+    url(r'athletsofcoach/$', views.AthletesOfCoach.as_view()),
+    url(r'requestsofcoach/$', views.RequestsOfCoach.as_view()),
+
     path('get_username_athlete/', views.get_username_athlete),
     path('get_username_coach/', views.get_username_coach),
 ]
