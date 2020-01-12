@@ -8,6 +8,13 @@ class ContractSerializer(ModelSerializer):
     class Meta:
         model  = Contract
         fields = '__all__'
+        depth = 2
+
+class ContractCreateSerializer(ModelSerializer):
+
+    class Meta:
+        model = Contract
+        fields = '__all__'
 
 class CustomUserSerializer(ModelSerializer):
 

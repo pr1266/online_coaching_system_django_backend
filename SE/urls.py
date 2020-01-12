@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^coach/(?P<user__username>[\w-]+)/$' , views.CoachDetailAPIView.as_view() , name = 'detail'),
     url(r'^coach/(?P<user__username>[\w-]+)/edit/$' , views.CoachUpdateAPIView.as_view() , name = 'edit'),
     url(r'^coach/(?P<user__username>[\w-]+)/delete/$' , views.CoachDeleteAPIView.as_view() , name = 'delete'),
-
+    url('createcoach/', views.CoachCreateAPIView.as_view()),
     #!!!
     url(r'^coach_/(?P<nat_code>[\w-]+)/$' , views.CoachDetailAPIView_.as_view() , name = 'detail'),
 
@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^athlete/(?P<nat_code>[\w-]+)/$' , views.AthleteDetailAPIView.as_view() , name = 'detail'),
     url(r'^athlete/(?P<nat_code>[\w-]+)/edit/$' , views.AthleteUpdateAPIView.as_view() , name = 'edit'),
     url(r'^athlete/(?P<nat_code>[\w-]+)/delete/$' , views.AthleteDeleteAPIView.as_view() , name = 'delete'),
-
+    url('createathlete/', views.AthleteCreateAPIView.as_view()),
     #! contracts urls
     url('createcontract/', views.ContractCreateAPIView.as_view(), name = 'create contract'),
     url(r'^contract/$' , views.ContractListAPIView.as_view()),
