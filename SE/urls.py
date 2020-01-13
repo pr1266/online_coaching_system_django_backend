@@ -51,6 +51,7 @@ urlpatterns = [
 
     path('get_username_athlete/', views.get_username_athlete),
     path('get_username_coach/', views.get_username_coach),
+    path('search_city/',views.search_city),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -300,3 +300,15 @@ def get_username_coach(request):
     ser_obj = CoachSerializer(obj, many = False)
 
     return Response(ser_obj.data)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
+def search_city(request):
+
+    city = request.data['city']
+    print(city)
+    city = int(city)
+    obj = Coach.objects.filter(city = city)
+    ser_obj = CoachSerializer(obj, many = True)
+
+    return Response(ser_obj.data)
